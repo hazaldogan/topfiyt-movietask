@@ -11,17 +11,23 @@ export default function Slider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
+  const sortedMovies = data.results
+    .sort((a, b) => {
+      return b.popularity - a.popularity;
+    })
+    .slice(0, 5);
+
   const next = () => {
     if (animating) return;
     const nextIndex =
-      activeIndex === data.slider.length - 1 ? 0 : activeIndex + 1;
+      activeIndex === sortedMovies.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   };
 
   const previous = () => {
     if (animating) return;
     const nextIndex =
-      activeIndex === 0 ? data.slider.length - 1 : activeIndex - 1;
+      activeIndex === 0 ? sortedMovies.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   };
 
@@ -30,7 +36,7 @@ export default function Slider() {
     setActiveIndex(newIndex);
   };
 
-  const newSlides = data.map((item, i) => {
+  const newSlides = sortedMovies.map((item, i) => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
@@ -48,10 +54,10 @@ export default function Slider() {
             <h1 className="text-white text-6xl max-sm:text-xl font-bold">
               {item.original_title}
             </h1>
-            <h4 className="text-neutral-50 text-xl max-sm:text-sm">
+            <h4 className="text-neutral-400 text-xl max-sm:text-xs w-[50%]">
               {item.overview}
             </h4>
-            <button className="bg-green-500 py-3 px-2 w-[50%] rounded text-white text-2xl max-sm:text-sm font-bold ">
+            <button className="bg-teal-400 py-3 px-2 w-[25%] max-sm:w-[50%] rounded text-white text-xl max-sm:text-sm font-bold ">
               Detail
             </button>
           </div>
@@ -64,7 +70,7 @@ export default function Slider() {
   return (
     <Carousel activeIndex={activeIndex} next={next} previous={previous}>
       <CarouselIndicators
-        items={data.slider}
+        items={sortedMovies}
         activeIndex={activeIndex}
         onClickHandler={goToIndex}
       />
