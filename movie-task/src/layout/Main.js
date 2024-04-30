@@ -10,11 +10,11 @@ export default function Main() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/:id">
-          <Movie />
-        </Route>
         <Route exact path="/fav-movies">
           <FavoriteMovies />
+        </Route>
+        <Route exact path="/:id">
+          <Movie />
         </Route>
       </Switch>
     </div>
