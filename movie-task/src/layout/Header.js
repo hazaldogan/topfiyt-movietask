@@ -1,8 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Header() {
+  const history = useHistory();
   return (
     <header className="flex p-2 justify-between items-center">
       <div>
@@ -28,8 +30,16 @@ export default function Header() {
         </NavLink>
       </nav>
       <div className="hidden max-sm:flex gap-4">
-        <FontAwesomeIcon icon={faHouse} size="lg" />
-        <FontAwesomeIcon icon={faHeart} size="lg" />
+        <FontAwesomeIcon
+          icon={faHouse}
+          onClick={() => history.push("/")}
+          size="lg"
+        />
+        <FontAwesomeIcon
+          icon={faHeart}
+          onClick={() => history.push("/fav-movies")}
+          size="lg"
+        />
       </div>
     </header>
   );
