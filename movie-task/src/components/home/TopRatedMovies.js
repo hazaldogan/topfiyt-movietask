@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -46,6 +46,11 @@ export default function TopRatedMovies() {
                 <h5 className="text-xs text-center m-0">{item.vote_average}</h5>
               </div>
             </div>
+            <FontAwesomeIcon
+              className="text-red-700 px-2"
+              icon={faHeart}
+              size="sm"
+            />
           </div>
         ))}
       </div>
