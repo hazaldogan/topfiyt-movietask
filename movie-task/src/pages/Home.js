@@ -1,12 +1,15 @@
+import LatestMovies from "../components/home/LatestMovie";
+import PopularMovies from "../components/home/PopularMovies";
 import Slider from "../components/home/Slider";
-import { data } from "../data";
+import TopRatedMovies from "../components/home/TopRatedMovies";
 
 export default function Home() {
-  const movies = data.results;
-
   return (
     <>
       <Slider />
+      <PopularMovies />
+      <TopRatedMovies />
+      <LatestMovies />
     </>
   );
 }

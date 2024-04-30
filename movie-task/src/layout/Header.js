@@ -20,10 +20,10 @@ export default function Header() {
         </Link>
       </div>
       <nav className="flex gap-10 justify-start items-start font-bold max-sm:hidden">
-        <NavLink to="/" className="no-underline  text-gray-600">
+        <NavLink to="/" className="no-underline text-white">
           Home Page
         </NavLink>
-        <NavLink to="/fav-movies" className="no-underline  text-gray-600">
+        <NavLink to="/fav-movies" className="no-underline text-white">
           Favorite Movies
         </NavLink>
       </nav>
