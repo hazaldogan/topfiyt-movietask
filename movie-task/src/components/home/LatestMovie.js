@@ -25,7 +25,9 @@ export default function LatestMovies() {
           />
           <div className="text-white justify-center items-center text-start w-[50%] pl-24">
             <h3 className="text-sm">{latestMovie.original_title}</h3>
+            <p>{latestMovie.overview}</p>
             <h5 className="text-xs">
+              <span className="font-bold">Release Date: </span>
               {latestMovie.release_date
                 .split("-")
                 .reverse()
