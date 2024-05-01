@@ -11,6 +11,8 @@ import {
   getTopRatedMovies,
   getUpComingMovies,
 } from "./store/actions/movieActions";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ function App() {
       <Header />
       <Main />
       <Footer />
+      <ToastContainer />
     </div>
   );
 }
