@@ -33,12 +33,14 @@ export default function Header() {
         <FontAwesomeIcon
           icon={faHouse}
           onClick={() => history.push("/")}
+          className="text-white"
           size="lg"
         />
         <FontAwesomeIcon
           icon={faHeart}
           onClick={() => history.push("/fav-movies")}
           size="lg"
+          className="text-white"
         />
       </div>
     </header>
