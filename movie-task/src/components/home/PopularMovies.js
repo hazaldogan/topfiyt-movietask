@@ -3,12 +3,14 @@ import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addFavorite } from "../../store/actions/favMovieActions";
+import { data } from "../../data";
 
 export default function PopularMovies() {
   const popMovies = useSelector((store) => store.movieReducer.popular);
   const history = useHistory();
   const dispatch = useDispatch();
-  const sortedPopMovies = popMovies.results
+  const movies = popMovies.length > 0 ? popMovies : data;
+  const sortedPopMovies = movies.results
     .sort((a, b) => {
       return b.popularity - a.popularity;
     })

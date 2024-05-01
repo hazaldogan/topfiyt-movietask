@@ -23,16 +23,17 @@ export default function LatestMovies() {
             alt={latestMovie.original_title}
             className="w-[40%] object-contain"
           />
-          <div className="text-white justify-center items-center text-start w-[50%] pl-24">
+          <div className="text-white justify-center items-center text-start w-[50%] max-sm:w-full max-sm:pt-5 pl-24">
             <h3 className="text-sm">{latestMovie.original_title}</h3>
             <p>{latestMovie.overview}</p>
             <h5 className="text-xs">
               <span className="font-bold">Release Date: </span>
-              {latestMovie.release_date
-                .split("-")
-                .reverse()
-                .toString()
-                .replaceAll(",", "/")}
+              {latestMovie.release_date != null &&
+                latestMovie.release_date
+                  .split("-")
+                  .reverse()
+                  .toString()
+                  .replaceAll(",", "/")}
             </h5>
             <div className="flex gap-1 ">
               <FontAwesomeIcon

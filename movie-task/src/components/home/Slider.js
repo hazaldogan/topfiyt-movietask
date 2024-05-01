@@ -7,13 +7,15 @@ import {
   CarouselControl,
   CarouselIndicators,
 } from "reactstrap";
+import { data } from "../../data";
 
 export default function Slider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const history = useHistory();
   const upComingMovies = useSelector((store) => store.movieReducer.up_coming);
-  const sortedMovies = upComingMovies.results
+  const movies = upComingMovies.length > 0 ? upComingMovies : data;
+  const sortedMovies = movies.results
     .sort((a, b) => {
       return b.release_date - a.release_date;
     })

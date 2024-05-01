@@ -4,14 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addFavorite } from "../../store/actions/favMovieActions";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { data } from "../../data";
 
 export default function TopRatedMovies() {
   const topRatedMovies = useSelector((store) => store.movieReducer.top_rated);
   const history = useHistory();
   const dispatch = useDispatch();
   const favList = useSelector((store) => store.favMovieReducer.favMovies);
-
-  const sortedTopMovies = topRatedMovies.results
+  const movies = topRatedMovies.length > 0 ? topRatedMovies : data;
+  const sortedTopMovies = movies.results
     .sort((a, b) => {
       return b.vote_average - a.vote_average;
     })
@@ -40,11 +41,12 @@ export default function TopRatedMovies() {
               <div className="text-white text-start ">
                 <h3 className="text-sm">{item.original_title}</h3>
                 <h5 className="text-xs">
-                  {item.release_date
-                    .split("-")
-                    .reverse()
-                    .toString()
-                    .replaceAll(",", "/")}
+                  {item.release_date != null &&
+                    item.release_date
+                      .split("-")
+                      .reverse()
+                      .toString()
+                      .replaceAll(",", "/")}
                 </h5>
                 <div className="flex gap-1  items-center">
                   <FontAwesomeIcon
