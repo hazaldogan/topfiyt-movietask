@@ -5,11 +5,13 @@ import { removeFavorite } from "../store/actions/favMovieActions";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export default function FavoriteMovies() {
-  const favMovies = useSelector((store) => store.favMovieReducer.favMovies);
+  const favs = useSelector((store) => store.favMovieReducer.favMovies);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [favMovies, setFavMovies] = useLocalStorage("favoriteMovies", favs);
 
   function removeFavClickHandler(movieId) {
     Swal.fire({
@@ -23,6 +25,7 @@ export default function FavoriteMovies() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(removeFavorite(movieId));
+        setFavMovies(favMovies.filter((movie) => movieId !== movie.id));
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",

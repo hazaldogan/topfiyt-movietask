@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { addFavorite } from "../../store/actions/favMovieActions";
 import { data } from "../../data";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export default function PopularMovies() {
   const popMovies = useSelector((store) => store.movieReducer.popular);
@@ -15,8 +16,11 @@ export default function PopularMovies() {
       return b.popularity - a.popularity;
     })
     .slice(0, 10);
+  const favs = useSelector((store) => store.favMovieReducer.favMovies);
+  const [favMovies, setFavMovies] = useLocalStorage("favoriteMovies", favs);
 
   function favAddClickHandler(movie) {
+    setFavMovies([...favs, movie]);
     dispatch(addFavorite(movie));
   }
 
