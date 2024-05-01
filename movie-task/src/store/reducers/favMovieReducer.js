@@ -1,4 +1,5 @@
 import { ADD_FAVORITE, FAV_REMOVE } from "../actions/favMovieActions";
+import { Flip, toast } from "react-toastify";
 
 const initialState = {
   favMovies: [],
@@ -7,6 +8,17 @@ const initialState = {
 export const favMovieReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FAVORITE:
+      toast.success("Added to favorites!", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Flip,
+      });
       let movie;
       let foundedMovie;
       if (action.payload) {

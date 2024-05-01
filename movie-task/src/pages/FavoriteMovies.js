@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFavorite } from "../store/actions/favMovieActions";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function FavoriteMovies() {
   const favMovies = useSelector((store) => store.favMovieReducer.favMovies);
@@ -10,7 +12,24 @@ export default function FavoriteMovies() {
   const history = useHistory();
 
   function removeFavClickHandler(movieId) {
-    dispatch(removeFavorite(movieId));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeFavorite(movieId));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   }
 
   return (
@@ -55,7 +74,7 @@ export default function FavoriteMovies() {
                 className="text-red-700 px-2 cursor-pointer"
                 icon={faTrash}
                 size="sm"
-                onClick={() => removeFavClickHandler(item)}
+                onClick={() => removeFavClickHandler(item.id)}
               />
             </div>
           ))}
